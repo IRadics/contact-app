@@ -37,3 +37,5 @@ next-env.d.ts
 
 # workspace files
 *.code-workspace
+
+.env

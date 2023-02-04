@@ -1,9 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Glysa";
+    src: local("Glysa"), url("../assets/fonts/Glysa.otf"), format("otf");
+  }
+  @font-face {
+    font-family: "LexendDeca";
+    src: local("LexendDeca"), url("../assets/fonts/LexendDeca.ttf"),
+      format("ttf");
+  }
+}
+
+@layer components {
+  .t1,
+  h1 {
+    @apply font-title text-xl tracking-[0];
+  }
+  .t2,
+  h2 {
+    @apply font-title text-lg tracking-[0];
+  }
+  .t3,
+  h3 {
+    @apply font-default text-base tracking-[0.16px];
+  }
+  .t4 {
+    @apply font-default text-sm tracking-[0.14px];
+  }
+  .t5 {
+    @apply font-default text-xs tracking-[0.12px];
+  }
+}
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
