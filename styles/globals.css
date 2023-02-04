@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  input:focus {
+    outline: none;
+  }
   @font-face {
     font-family: "Glysa";
     src: local("Glysa"), url("../assets/fonts/Glysa.otf"), format("otf");
