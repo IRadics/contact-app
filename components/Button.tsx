@@ -24,7 +24,6 @@ const Button = React.forwardRef<
     //Apply the gap only for base style if both icon and children (label) are present
     icon && props.children ? "gap-2" : ""
   }`;
-  const specialBorderWidth = "1px";
 
   const getStyling = (type: ButtonType) => {
     switch (type) {
@@ -56,8 +55,7 @@ const Button = React.forwardRef<
         bg-gradient-to-b from-uicolor-20/100 to-uicolor-20/0 ${baseStyle}`}
       >
         <div
-          className={`rounded-full box-content absolute 
-          w-[calc(100%-2*${specialBorderWidth})]  h-[calc(100%-2*${specialBorderWidth})] 
+          className={`rounded-full box-content absolute w-[calc(100%-(2*1px))] h-[calc(100%-(2*1px))] 
           bg-gradient-to-b from-uicolor-60/70 to-uicolor-60/100
           group-hover:bg-[#FFFFFF0A] group-active::bg-[#FFFFFF0A]
           z-[1]`}
