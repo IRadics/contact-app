@@ -17,7 +17,7 @@ const Button = React.forwardRef<
     type?: ButtonType;
   } & HTMLProps<HTMLButtonElement>
 >((props, ref) => {
-  const { type = "primary", icon, ...htmlButtonProps } = props;
+  const { type = "primary", icon, className, ...htmlButtonProps } = props;
 
   const baseStyle = `relative t4 flex flex-row justify-center items-center h-10 px-3 py-2
   ${
@@ -39,7 +39,7 @@ const Button = React.forwardRef<
       <button
         {...htmlButtonProps}
         ref={ref}
-        className={`${baseStyle} ${getStyling(type)}`}
+        className={`${baseStyle} ${getStyling(type)} ${className}`}
       >
         {icon && <Image src={icon} alt=""></Image>}
         {props.children}
@@ -52,7 +52,7 @@ const Button = React.forwardRef<
         {...htmlButtonProps}
         ref={ref}
         className={`group relative rounded-full 
-        bg-gradient-to-b from-uicolor-20/100 to-uicolor-20/0 ${baseStyle}`}
+        bg-gradient-to-b from-uicolor-20/100 to-uicolor-20/0 ${baseStyle} ${className}`}
       >
         <div
           className={`rounded-full box-content absolute w-[calc(100%-(2*1px))] h-[calc(100%-(2*1px))] 
