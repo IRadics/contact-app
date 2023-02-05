@@ -28,7 +28,7 @@ const ProfilePicture = ({
       className={`rounded-full border border-uicolor-70 w-[${sizePx}px] h-[${sizePx}px] overflow-hidden`}
     >
       <Image
-        className={`rounded-full w-[${sizePx}px] h-[${sizePx}px] object-contain`}
+        className={`rounded-full w-[${sizePx}px] h-[${sizePx}px] object-cover`}
         src={imageSrc}
         onError={replaceToDefault}
         alt="profile picture"
