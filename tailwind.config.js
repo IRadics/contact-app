@@ -22,7 +22,7 @@ module.exports = {
         70: "#232323",
         80: "#1E1E1E",
         90: "#191919",
-        100: "#2D2D2D",
+        100: "#141414",
       },
       textcolor: {
         primary: "rgba(255, 255, 255, 1)",
@@ -34,6 +34,9 @@ module.exports = {
       fontFamily: {
         title: ["Glysa"],
         default: ["LexendDeca"],
+      },
+      screens: {
+        xs: "500px",
       },
     },
   },
