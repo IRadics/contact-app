@@ -9,16 +9,17 @@ export interface TextInputProps
  */
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
   (props, ref) => {
+    const { className, ...htmlInputProps } = props;
     return (
       <input
-        className="w-full h-10 px-3 py-2  rounded-lg  border 
+        className={`w-full h-10 px-3 py-2  rounded-lg  border 
      placeholder:text-textcolor-disabled
      bg-uicolor-80  border-uicolor-60
      hover:bg-uicolor-80 hover:border-uicolor-30
-     focus:bg-uicolor-60 focus:border-uicolor-10"
+     focus:bg-uicolor-60 focus:border-uicolor-10 ${className}`}
         ref={ref}
         type={"text"}
-        {...props}
+        {...htmlInputProps}
       ></input>
     );
   }
