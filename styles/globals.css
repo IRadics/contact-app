@@ -4,7 +4,10 @@
 
 @layer base {
   input:focus {
-    outline: none;
+    @apply outline-none;
+  }
+  input {
+    @apply appearance-none;
   }
   body {
     @apply bg-uicolor-100 text-textcolor-primary;
