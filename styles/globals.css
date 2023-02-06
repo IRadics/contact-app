@@ -14,12 +14,11 @@
   }
   @font-face {
     font-family: "Glysa";
-    src: local("Glysa"), url("../assets/fonts/Glysa.otf"), format("otf");
+    src: url("../assets/fonts/Glysa.otf");
   }
   @font-face {
     font-family: "LexendDeca";
-    src: local("LexendDeca"), url("../assets/fonts/LexendDeca.ttf"),
-      format("ttf");
+    src: url("../assets/fonts/LexendDeca.ttf");
   }
 }
 
