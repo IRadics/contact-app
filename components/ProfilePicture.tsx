@@ -25,8 +25,7 @@ const ProfilePicture = ({
   }, [src]);
 
   const sizePx = size === "small" ? 40 : 88;
-  const sizeClasses =
-    size === "small" ? "w-[40px] h-[40px]" : "w-[88x] h-[88px]";
+  const sizeClasses = size === "small" ? "h-[40px] " : "h-[88px]";
 
   const replaceToDefault = () => {
     setImageSrc(defaultImage.src);
