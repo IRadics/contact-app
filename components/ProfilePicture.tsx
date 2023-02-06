@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import defaultImage from "../assets/images/profilePicDefault.png";
 
 /**
@@ -19,6 +19,10 @@ const ProfilePicture = ({
 }) => {
   if (!src) src = defaultImage.src;
   const [imageSrc, setImageSrc] = useState<string>(src);
+
+  useEffect(() => {
+    if (src) setImageSrc(src);
+  }, [src]);
 
   const sizePx = size === "small" ? 40 : 88;
 
