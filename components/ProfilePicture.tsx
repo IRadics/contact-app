@@ -25,6 +25,8 @@ const ProfilePicture = ({
   }, [src]);
 
   const sizePx = size === "small" ? 40 : 88;
+  const sizeClasses =
+    size === "small" ? "w-[40px] h-[40px]" : "w-[88x] h-[88px]";
 
   const replaceToDefault = () => {
     setImageSrc(defaultImage.src);
@@ -32,10 +34,10 @@ const ProfilePicture = ({
 
   return (
     <div
-      className={`rounded-full border border-uicolor-70 w-[${sizePx}px] h-[${sizePx}px] overflow-hidden ${className}`}
+      className={`rounded-full border border-uicolor-70 overflow-hidden ${className} ${sizeClasses}`}
     >
       <Image
-        className={`rounded-full w-[${sizePx}px] h-[${sizePx}px] object-cover`}
+        className={`rounded-full  object-cover  ${sizeClasses}`}
         src={imageSrc}
         onError={replaceToDefault}
         alt="profile picture"
