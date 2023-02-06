@@ -58,10 +58,10 @@ const Button = React.forwardRef<
           className={`rounded-full box-content absolute w-[calc(100%-(2*1px))] h-[calc(100%-(2*1px))] 
           bg-gradient-to-b from-uicolor-60/70 to-uicolor-60/100
           group-hover:bg-[#FFFFFF0A] group-active::bg-[#FFFFFF0A]
-          z-[1]`}
+          z-[0]`}
         ></div>
-        {icon && <Image src={icon} alt="" className="z-[2]"></Image>}
-        <span className="z-[2]">{props.children}</span>
+        {icon && <Image src={icon} alt="" className="z-[1]"></Image>}
+        <span className="z-[1]">{props.children}</span>
       </button>
     );
   }
