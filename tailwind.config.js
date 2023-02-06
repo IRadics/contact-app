@@ -23,6 +23,7 @@ module.exports = {
         80: "#1E1E1E",
         90: "#191919",
         100: "#141414",
+        error: "#7f1d1d",
       },
       textcolor: {
         primary: "rgba(255, 255, 255, 1)",
