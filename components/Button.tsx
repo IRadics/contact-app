@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-import React from "react";
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { HTMLProps } from "react";
 
 type ButtonType = "primary" | "secondary" | "special";
@@ -7,17 +7,20 @@ type ButtonType = "primary" | "secondary" | "special";
 /**
  * Styled Button element with optional icon.
  * @param icon - statically imported icon data
- * @param type - style type , primary, secondary or special
+ * @param styleType - style type , primary, secondary or special
  * @param ...ButtonProps - All the available props for HTML button element
  */
 const Button = React.forwardRef<
   HTMLButtonElement,
   {
     icon?: StaticImageData;
-    type?: ButtonType;
-  } & HTMLProps<HTMLButtonElement>
+    styleType?: ButtonType;
+  } & DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >
 >((props, ref) => {
-  const { type = "primary", icon, className, ...htmlButtonProps } = props;
+  const { styleType = "primary", icon, className, ...htmlButtonProps } = props;
 
   const baseStyle = `relative t4 flex flex-row justify-center items-center h-10 px-3 py-2
   ${
@@ -25,8 +28,8 @@ const Button = React.forwardRef<
     icon && props.children ? "gap-2" : ""
   }`;
 
-  const getStyling = (type: ButtonType) => {
-    switch (type) {
+  const getStyling = (styleType: ButtonType) => {
+    switch (styleType) {
       case "primary":
         return "rounded-lg bg-uicolor-60 hover:bg-uicolor-50 active:bg-uicolor-40";
       case "secondary":
@@ -34,12 +37,12 @@ const Button = React.forwardRef<
     }
   };
 
-  if (type !== "special") {
+  if (styleType !== "special") {
     return (
       <button
         {...htmlButtonProps}
         ref={ref}
-        className={`${baseStyle} ${getStyling(type)} ${className}`}
+        className={`${baseStyle} ${getStyling(styleType)} ${className}`}
       >
         {icon && <Image src={icon} alt=""></Image>}
         {props.children}
