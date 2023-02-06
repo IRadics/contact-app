@@ -1,7 +1,6 @@
-import React, { HTMLProps } from "react";
+import React, { InputHTMLAttributes } from "react";
 
-export interface TextInputProps
-  extends Omit<HTMLProps<HTMLInputElement>, "type"> {}
+export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 /**
  * Text input element
@@ -18,7 +17,6 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
      hover:bg-uicolor-80 hover:border-uicolor-30
      focus:bg-uicolor-60 focus:border-uicolor-10 ${className}`}
         ref={ref}
-        type={"text"}
         {...htmlInputProps}
       ></input>
     );
