@@ -19,9 +19,9 @@ const TextInputLabelled = React.forwardRef<
     <div
       className={`w-full flex flex-col justify-center items-center ${className}`}
     >
-      <div className="text-textcolor-secondary w-full t5 mb-1 text-left">
+      <label className="text-textcolor-secondary w-full t5 mb-1 text-left">
         {props.label}
-      </div>
+      </label>
       <TextInput {...htmlInputProps} ref={ref} />
     </div>
   );
