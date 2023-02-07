@@ -64,12 +64,12 @@ const ContactListItem = ({
       </div>
 
       <div className="relative flex flex-row justify-end items-center gap-2 flex-shrink-0">
-        <Button icon={muteIcon} type="secondary" />
-        <Button icon={callIcon} type="secondary" />
+        <Button icon={muteIcon} styleType="secondary" />
+        <Button icon={callIcon} styleType="secondary" />
         <div className="relative h-fit w-fit">
           <Button
             icon={moreIcon}
-            type="secondary"
+            styleType="secondary"
             onClick={() => setContextListOpen(true)}
             className={`relative ${
               contextListOpen ? "hover:bg-none active:bg-none" : ""
