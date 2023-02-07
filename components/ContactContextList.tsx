@@ -11,7 +11,7 @@ const ContactContextList = ({
   const sizePx = 20;
 
   return (
-    <div className={`w-56 rounded-lg overflow-hidden ${className}`}>
+    <div className={`w-56 rounded-lg overflow-hidden ${className} z-10`}>
       {items.map((item) => (
         <button
           className="flex flex-row h-11 w-full bg-uicolor-80 hover:bg-uicolor-70 active:bg-uicolor-60 p-3 gap-3 max-md:flex-row-reverse"
