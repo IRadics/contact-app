@@ -53,6 +53,21 @@ const ContactListItem = ({
     },
   ];
 
+  const contextListItemsHiddenElements: ContactContextListItem[] = [
+    {
+      icon: muteIcon,
+      contact: contact,
+      label: "Mute",
+      action: () => {},
+    },
+    {
+      icon: callIcon,
+      contact: contact,
+      label: "Call",
+      action: () => {},
+    },
+  ];
+
   return (
     <div className={`flex flex-row justify-between w-full ${className}`}>
       <div className="relative flex flex-row items-center h-10 gap-4">
@@ -74,8 +89,16 @@ const ContactListItem = ({
       </div>
 
       <div className="relative flex flex-row justify-end items-center gap-2 flex-shrink-0">
-        <Button icon={muteIcon} styleType="secondary" />
-        <Button icon={callIcon} styleType="secondary" />
+        <Button
+          icon={muteIcon}
+          styleType="secondary"
+          className="max-sm:hidden"
+        />
+        <Button
+          icon={callIcon}
+          styleType="secondary"
+          className="max-sm:hidden"
+        />
         <div className="relative h-fit w-fit">
           <Button
             icon={moreIcon}
@@ -87,10 +110,16 @@ const ContactListItem = ({
             onBlur={() => setContextListOpen(false)}
           ></Button>
           {contextListOpen && (
-            <ContactContextList
-              items={contextListItems}
-              className="absolute top-[calc(100%+8px)] max-md:right-0"
-            />
+            <>
+              <ContactContextList
+                items={contextListItems}
+                className="absolute top-[calc(100%+8px)] max-md:right-0 max-sm:hidden"
+              />
+              <ContactContextList
+                items={[...contextListItemsHiddenElements, ...contextListItems]}
+                className="absolute top-[calc(100%+8px)] max-md:right-0 sm:hidden"
+              />
+            </>
           )}
         </div>
       </div>
