@@ -37,6 +37,7 @@ module.exports = {
         default: ["LexendDeca"],
       },
       screens: {
+        xxs: "350px",
         xs: "500px",
       },
     },

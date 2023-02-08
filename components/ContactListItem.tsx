@@ -69,20 +69,19 @@ const ContactListItem = ({
   ];
 
   return (
-    <div className={`flex flex-row justify-between w-full ${className}`}>
+    <div className={`flex flex-row justify-between w-full ${className} `}>
       <div className="relative flex flex-row items-center h-10 gap-4">
         <ProfilePicture
           size="small"
           src={contact.profilePicSrc}
-          className="max-xs:hidden flex-shrink-0"
+          className="flex-shrink-0"
         />
 
         <div className="relative h-full table table-fixed">
-          <div>
-            <span className="t3 text-textcolor-primary whitespace-nowrap">
+          <div className="max-w-[30vw] overflow-hidden leading-[0] h-10 flex flex-col justify-around">
+            <span className="t3 text-textcolor-primary xs:whitespace-nowrap max-xs:t5 block">
               {contact.name}
             </span>
-            <br />
             <span className="t5 text-textcolor-secondary whitespace-nowrap">
               {contact.phoneNr}
             </span>

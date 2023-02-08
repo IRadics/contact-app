@@ -5,16 +5,18 @@ import UserPicture from "./UserPicture";
 import { useContext } from "react";
 import { AppContext } from "@/clientFunctions/context/appContext";
 
-const Header = () => {
+const Header = ({ className }: { className?: string }) => {
   const { contactEditOverlay } = useContext(AppContext);
 
   //todo: use global state / context api to set the title if there will be other pages
   const title = "Contacts";
 
   return (
-    <div className="h-24 px-6 py-6 flex flex-row flex-shrink-0 justify-between items-center">
-      <div className="t1 max-sm:t2 max-xs:t3">{title}</div>
-      <div className="flex flex-row flex-shrink-0 justify-end items-center gap-2">
+    <div
+      className={`py-6 flex flex-row flex-shrink-0 justify-between items-center ${className}`}
+    >
+      <div className="t1 max-md:text-lg max-xs:text-sm">{title}</div>
+      <div className="flex flex-row flex-shrink-0 justify-end items-center gap-2 max-sm:gap-1 max-xxs:gap-0">
         <Button icon={settingsIcon} styleType="secondary" />
         <Button styleType="secondary">
           <UserPicture />
@@ -22,7 +24,7 @@ const Header = () => {
         <Button
           styleType="special"
           icon={addIcon}
-          className={"ml-6"}
+          className={"ml-6 max-md:ml-1"}
           onClick={() => contactEditOverlay.open()}
         >
           Add new

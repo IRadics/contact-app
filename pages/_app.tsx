@@ -8,9 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <AppContextProvider>
       <Layout>
-        <div className="px-6 py-3">
-          <Component {...pageProps} />
-        </div>
+        <Component {...pageProps} />
       </Layout>
     </AppContextProvider>
   );
