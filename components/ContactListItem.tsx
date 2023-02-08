@@ -77,14 +77,16 @@ const ContactListItem = ({
           className="max-xs:hidden flex-shrink-0"
         />
 
-        <div className="relative h-full grid">
-          <span className="t3 text-textcolor-primary whitespace-nowrap">
-            {contact.name}
-          </span>
-          <br />
-          <span className="t5 text-textcolor-secondary whitespace-nowrap">
-            {contact.phoneNr}
-          </span>
+        <div className="relative h-full table table-fixed">
+          <div>
+            <span className="t3 text-textcolor-primary whitespace-nowrap">
+              {contact.name}
+            </span>
+            <br />
+            <span className="t5 text-textcolor-secondary whitespace-nowrap">
+              {contact.phoneNr}
+            </span>
+          </div>
         </div>
       </div>
 
