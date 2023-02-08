@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <div className="h-24 px-6 py-6 flex flex-row flex-shrink-0 justify-between items-center">
-      <div className="t1">{title}</div>
+      <div className="t1 max-sm:t2 max-xs:t3">{title}</div>
       <div className="flex flex-row flex-shrink-0 justify-end items-center gap-2">
         <Button icon={settingsIcon} styleType="secondary" />
         <Button styleType="secondary">

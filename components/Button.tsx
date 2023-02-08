@@ -64,7 +64,7 @@ const Button = React.forwardRef<
           z-[0]`}
         ></div>
         {icon && <Image src={icon} alt="" className="z-[1]"></Image>}
-        <span className="z-[1]">{props.children}</span>
+        <span className="z-[1] max-sm:hidden">{props.children}</span>
       </button>
     );
   }

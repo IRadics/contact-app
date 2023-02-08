@@ -22,7 +22,7 @@ export default function Layout({ children }: props) {
       )}
       <div className={`h-full flex flex-row divide-x ${divCol}`}>
         {/*left column*/}
-        <div className={`h-full grow divide-y ${divCol}`}>
+        <div className={`h-full grow divide-y ${divCol} shrink-0`}>
           <div className="h-24"></div>
           <div className="h-24 flex flex-row justify-end items-center px-6">
             <Button styleType="secondary" icon={backArrowIcon} />
@@ -40,7 +40,7 @@ export default function Layout({ children }: props) {
         </div>
 
         {/*right column*/}
-        <div className={`h-full grow divide-y ${divCol}`}>
+        <div className={`h-full grow divide-y ${divCol} shrink-0`}>
           <div className="h-24"></div>
           <div className="h-24 flex flex-row justify-start items-center px-6">
             <Button styleType="secondary" icon={lightModeIcon} />
