@@ -1,8 +1,17 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import ContactListItem from "@/components/ContactListItem";
+import { AppContext } from "@/clientFunctions/context/appContext";
 
 export default function Home() {
+  const {
+    api: { fetchContacts, contacts },
+  } = useContext(AppContext);
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,7 +23,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}></main>
+      <main>
+        <div className="flex flex-col gap-6">
+          {contacts &&
+            contacts.map((contact) => {
+              return (
+                <ContactListItem
+                  contact={contact}
+                  key={contact.id}
+                ></ContactListItem>
+              );
+            })}
+        </div>
+      </main>
     </>
   );
 }

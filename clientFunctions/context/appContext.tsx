@@ -1,31 +1,38 @@
 import { Contact } from "@/types/Contact";
 
 import { createContext, useReducer } from "react";
+import createContact from "../api/createContact";
+import deleteContact from "../api/deleteContact";
+import getContacts from "../api/getContacts";
+import updateContact from "../api/updateContact";
 
 type AppContextData = {
   contactEditOverlay: {
     isOpen: boolean;
     contact?: Contact;
   };
+  contacts: Contact[];
 };
 const initialState: AppContextData = {
   contactEditOverlay: {
     isOpen: false,
   },
+  contacts: [],
 };
 
 export const AppContext = createContext<AppContextType>({} as AppContextType);
 
-type ActionType = "OPEN_CONTACT_EDIT" | "CLOSE_CONTACT_EDIT";
+type ActionType =
+  | "OPEN_CONTACT_EDIT"
+  | "CLOSE_CONTACT_EDIT"
+  | "FETCH_CONTACTS"
+  | "DELETE_CONTACT"
+  | "UPDATE_CONTACT"
+  | "CREATE_CONTACT";
 
 type AppContextAction = {
   type: ActionType;
-  data?: Contact;
-};
-
-const actions = {
-  OPEN_CONTACT_EDIT: "ADD_TODO_ITEM",
-  CLOSE_CONTACT_EDIT: "REMOVE_TODO_ITEM",
+  data?: Contact | Contact[];
 };
 
 const reducer = (
@@ -36,7 +43,7 @@ const reducer = (
     case "OPEN_CONTACT_EDIT": {
       return {
         ...state,
-        contactEditOverlay: { isOpen: true, contact: action.data },
+        contactEditOverlay: { isOpen: true, contact: action.data as Contact },
       };
     }
     case "CLOSE_CONTACT_EDIT": {
@@ -45,17 +52,34 @@ const reducer = (
         contactEditOverlay: { isOpen: false, contact: undefined },
       };
     }
+
+    case "FETCH_CONTACTS": {
+      return {
+        ...state,
+        contacts: action.data as Contact[],
+      };
+    }
+
     default:
       return state;
   }
 };
 
 type AppContextType = {
-  appContextData: AppContextData;
+  api: {
+    contacts: Contact[];
+    fetchContacts: () => void;
+    deleteContact: (contactId: number) => Promise<boolean>;
+    updateContact: (contact: Contact) => Promise<boolean>;
+    createContact: (contact: Contact) => Promise<boolean>;
+  };
 
-  openContactEditOverlay: (contact?: Contact) => void;
-  closeContactEditOverlay: () => void;
-  isContactEditOverlayOpen: boolean;
+  contactEditOverlay: {
+    open: (contact?: Contact) => void;
+    close: () => void;
+    isOpen: boolean;
+    editedContact?: Contact;
+  };
 };
 
 export const AppContextProvider = ({
@@ -65,15 +89,61 @@ export const AppContextProvider = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  //reusable fetch method defined here to use it after update/delete/create
+  const fetchContacts = () => {
+    getContacts().then((contacts) => {
+      dispatch({ type: "FETCH_CONTACTS", data: contacts });
+    });
+  };
+
   const value: AppContextType = {
-    appContextData: state,
-    openContactEditOverlay: (contact?: Contact) => {
-      dispatch({ type: "OPEN_CONTACT_EDIT", data: contact });
+    contactEditOverlay: {
+      open: (contact?: Contact) => {
+        dispatch({ type: "OPEN_CONTACT_EDIT", data: contact });
+      },
+      close() {
+        dispatch({ type: "CLOSE_CONTACT_EDIT" });
+      },
+      isOpen: state.contactEditOverlay.isOpen,
+      editedContact: state.contactEditOverlay.contact,
     },
-    closeContactEditOverlay() {
-      dispatch({ type: "CLOSE_CONTACT_EDIT" });
+
+    api: {
+      contacts: state.contacts,
+      fetchContacts: fetchContacts,
+
+      createContact: async (contact: Contact) => {
+        return await createContact(contact)
+          .then(() => {
+            fetchContacts();
+            return true;
+          })
+          .catch((error) => {
+            return false;
+          });
+      },
+
+      updateContact: async (contact: Contact) => {
+        return await updateContact(contact)
+          .then(() => {
+            fetchContacts();
+            return true;
+          })
+          .catch((error) => {
+            return false;
+          });
+      },
+      deleteContact: async (contactId: number) => {
+        return await deleteContact(contactId)
+          .then(() => {
+            fetchContacts();
+            return true;
+          })
+          .catch((error) => {
+            return false;
+          });
+      },
     },
-    isContactEditOverlayOpen: state.contactEditOverlay.isOpen,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

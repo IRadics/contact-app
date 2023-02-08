@@ -9,9 +9,11 @@ import editIcon from "../assets/icons/settings.svg";
 import favIcon from "../assets/icons/favourite.svg";
 import removeIcon from "../assets/icons/delete.svg";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ContactContextListItem } from "@/types/ContactContextListItem";
 import ContactContextList from "./ContactContextList";
+
+import { AppContext } from "@/clientFunctions/context/appContext";
 
 const ContactListItem = ({
   contact,
@@ -21,13 +23,17 @@ const ContactListItem = ({
   className?: string;
 }) => {
   const [contextListOpen, setContextListOpen] = useState<boolean>(false);
+  const {
+    contactEditOverlay,
+    api: { deleteContact },
+  } = useContext(AppContext);
 
   const contextListItems: ContactContextListItem[] = [
     {
       icon: editIcon,
       contact: contact,
       label: "Edit",
-      action: () => {},
+      action: (contact) => contactEditOverlay.open(contact),
     },
     {
       icon: favIcon,
@@ -39,7 +45,11 @@ const ContactListItem = ({
       icon: removeIcon,
       contact: contact,
       label: "Remove",
-      action: () => {},
+      action: async (contact) => {
+        if (contact.id) {
+          deleteContact(contact.id);
+        }
+      },
     },
   ];
 

@@ -2,6 +2,9 @@ import Button from "./Button";
 import Header from "./Header";
 import backArrowIcon from "../assets/icons/backArrow.svg";
 import lightModeIcon from "../assets/icons/lightMode.svg";
+import { useContext } from "react";
+import { AppContext } from "@/clientFunctions/context/appContext";
+import ContactEditOverlay from "./ContactEditOverlay";
 
 interface props {
   children: JSX.Element;
@@ -10,8 +13,13 @@ interface props {
 export default function Layout({ children }: props) {
   const divCol = "divide-uicolor-60";
 
+  const { contactEditOverlay } = useContext(AppContext);
+
   return (
     <main className={`flex flex-col h-screen divide-y ${divCol}`}>
+      {contactEditOverlay.isOpen && (
+        <ContactEditOverlay contact={contactEditOverlay.editedContact} />
+      )}
       <div className={`h-full flex flex-row divide-x ${divCol}`}>
         {/*left column*/}
         <div className={`h-full grow divide-y ${divCol}`}>

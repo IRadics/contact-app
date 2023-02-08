@@ -2,9 +2,13 @@ import Button from "./Button";
 import settingsIcon from "../assets/icons/settings.svg";
 import addIcon from "../assets/icons/add.svg";
 import UserPicture from "./UserPicture";
+import { useContext } from "react";
+import { AppContext } from "@/clientFunctions/context/appContext";
 
 const Header = () => {
-  //todo: use global state / context api to set the title
+  const { contactEditOverlay } = useContext(AppContext);
+
+  //todo: use global state / context api to set the title if there will be other pages
   const title = "Contacts";
 
   return (
@@ -15,7 +19,12 @@ const Header = () => {
         <Button styleType="secondary">
           <UserPicture />
         </Button>
-        <Button styleType="special" icon={addIcon} className={"ml-6"}>
+        <Button
+          styleType="special"
+          icon={addIcon}
+          className={"ml-6"}
+          onClick={() => contactEditOverlay.open()}
+        >
           Add new
         </Button>
       </div>
