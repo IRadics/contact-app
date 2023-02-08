@@ -3,5 +3,5 @@ export type Contact = {
   phoneNr?: string;
   email?: string;
   profilePicSrc?: string;
-  id?: string;
+  id?: number;
 };
