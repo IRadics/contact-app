@@ -16,7 +16,9 @@ const ContactContextList = ({
         <button
           className="flex flex-row h-11 w-full bg-uicolor-80 hover:bg-uicolor-70 active:bg-uicolor-60 p-3 gap-3 max-md:flex-row-reverse"
           key={item.icon.src + item.label}
-          onClick={() => item.action}
+          onMouseDown={() => {
+            item.action(item.contact);
+          }}
         >
           <Image
             width={sizePx}
