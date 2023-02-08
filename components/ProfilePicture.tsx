@@ -17,18 +17,17 @@ const ProfilePicture = ({
   size: "small" | "large";
   className?: string;
 }) => {
-  if (!src) src = defaultImage.src;
-  const [imageSrc, setImageSrc] = useState<string>(src);
+  const [forceDefault, setForceDefault] = useState<boolean>(false);
 
   useEffect(() => {
-    if (src) setImageSrc(src);
+    setForceDefault(false);
   }, [src]);
 
   const sizePx = size === "small" ? 40 : 88;
   const sizeClasses = size === "small" ? "h-[40px] " : "h-[88px]";
 
   const replaceToDefault = () => {
-    setImageSrc(defaultImage.src);
+    setForceDefault(true);
   };
 
   return (
@@ -37,7 +36,7 @@ const ProfilePicture = ({
     >
       <Image
         className={`rounded-full  object-cover  ${sizeClasses}`}
-        src={imageSrc}
+        src={(!forceDefault && src) || defaultImage.src}
         onError={replaceToDefault}
         alt="profile picture"
         width={sizePx}
