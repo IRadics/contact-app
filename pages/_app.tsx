@@ -1,5 +1,5 @@
 import { AppContextProvider } from "@/clientFunctions/context/appContext";
-import Layout from "@/components/Layout";
+import Layout from "@/pages/_layout";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import React from "react";

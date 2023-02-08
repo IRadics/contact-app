@@ -1,10 +1,10 @@
-import Button from "./Button";
-import Header from "./Header";
+import Button from "../components/Button";
+import Header from "../components/Header";
 import backArrowIcon from "../assets/icons/backArrow.svg";
 import lightModeIcon from "../assets/icons/lightMode.svg";
 import { useContext } from "react";
 import { AppContext } from "@/clientFunctions/context/appContext";
-import ContactEditOverlay from "./ContactEditOverlay";
+import ContactEditOverlay from "../components/ContactEditOverlay";
 
 interface props {
   children: JSX.Element;
