@@ -13,15 +13,15 @@ export default function handler(
     return;
   }
 
-  if (id) {
-    deleteContact(parseInt(id))
-      .then((result) => {
-        res.status(200).json(result);
-        return result;
-      })
-      .catch((error) => res.status(500).json(error.message));
-  } else {
+  if (!id) {
     res.end();
     return;
   }
+
+  return deleteContact(parseInt(id))
+    .then((result) => {
+      res.status(200).json(result);
+      return result;
+    })
+    .catch((error) => res.status(500).json(error.message));
 }

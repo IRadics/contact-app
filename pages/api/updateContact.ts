@@ -12,7 +12,7 @@ export default function handler(
     res.end();
     return;
   }
-  updateContact({ name, email, phoneNr })
+  return updateContact({ name, email, phoneNr })
     .then((result) => {
       res.status(200).json(result);
       return result;
