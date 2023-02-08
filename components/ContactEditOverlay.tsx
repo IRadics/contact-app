@@ -114,7 +114,10 @@ const ContactEditOverlay = ({
                 </Button>
                 <Button
                   icon={deleteIcon}
-                  onClick={() => setProfilePicSrcLocal(undefined)}
+                  onClick={() => {
+                    setProfilePicSrcLocal(undefined);
+                    setProfilePicSrc(undefined);
+                  }}
                   type="button"
                 />
               </>
