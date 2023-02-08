@@ -2,6 +2,8 @@ import { Contact } from "@/types/Contact";
 import Button from "./Button";
 import ProfilePicture from "./ProfilePicture";
 import addIcon from "../assets/icons/add.svg";
+import changeIcon from "../assets/icons/change.svg";
+import deleteIcon from "../assets/icons/delete.svg";
 import TextInputLabelled from "./TextInputLabelled";
 import { ChangeEvent, useContext, useRef, useState } from "react";
 import { AppContext } from "@/clientFunctions/context/appContext";
@@ -15,14 +17,14 @@ const ContactEditOverlay = ({
   onSubmit?: (contact: Contact) => void;
   onCancel?: () => void;
 }) => {
-  const [profilePicSrc, setProfilePicSrc] = useState<string | undefined>(
-    contact?.profilePicSrc
-  );
-
   const isNewContact = !contact;
 
   const profilePicUploadRef = useRef<HTMLInputElement>(null);
 
+  const [profilePicSrcLocal, setProfilePicSrcLocal] = useState<string>();
+  const [profilePicSrc, setProfilePicSrc] = useState<string | undefined>(
+    contact?.profilePicSrc
+  );
   const [name, setName] = useState<string>(contact?.name || "");
   const [phoneNr, setPhoneNr] = useState<string>(contact?.phoneNr || "");
   const [email, setEmail] = useState<string>(contact?.email || "");
@@ -36,7 +38,7 @@ const ContactEditOverlay = ({
   const onFileUploadChange = (changeEvent: ChangeEvent<HTMLInputElement>) => {
     const image = changeEvent.target.files?.item(0);
     if (image) {
-      setProfilePicSrc(URL.createObjectURL(image));
+      setProfilePicSrcLocal(URL.createObjectURL(image));
     }
   };
 
@@ -94,12 +96,38 @@ const ContactEditOverlay = ({
             {isNewContact ? "Add Contact" : "Edit Contact"}
           </div>
 
+          {/*TODO: extract the picture upload part into a separate component */}
           <div className="flex flex-row justify-start items-center gap-4">
-            <ProfilePicture size="large" src={profilePicSrc} />
+            <ProfilePicture
+              size="large"
+              src={profilePicSrcLocal || profilePicSrc}
+            />
 
-            <Button icon={addIcon} onClick={openFileUploadDialog} type="button">
-              Add Picture
-            </Button>
+            {(profilePicSrcLocal || profilePicSrc) && (
+              <>
+                <Button
+                  icon={changeIcon}
+                  onClick={openFileUploadDialog}
+                  type="button"
+                >
+                  Change Picture
+                </Button>
+                <Button
+                  icon={deleteIcon}
+                  onClick={() => setProfilePicSrcLocal(undefined)}
+                  type="button"
+                />
+              </>
+            )}
+            {!profilePicSrcLocal && !profilePicSrc && (
+              <Button
+                icon={addIcon}
+                onClick={openFileUploadDialog}
+                type="button"
+              >
+                Add Picture
+              </Button>
+            )}
             <input
               type="file"
               ref={profilePicUploadRef}
