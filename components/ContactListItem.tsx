@@ -78,7 +78,7 @@ const ContactListItem = ({
         />
 
         <div className="relative h-full table table-fixed">
-          <div className="max-w-[30vw] overflow-hidden leading-[0] h-10 flex flex-col justify-around">
+          <div className="leading-[0] h-10 flex flex-col justify-around">
             <span className="t3 text-textcolor-primary xs:whitespace-nowrap max-xs:t5 block">
               {contact.name}
             </span>
