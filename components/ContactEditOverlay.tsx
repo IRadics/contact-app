@@ -1,12 +1,9 @@
 import { Contact } from "@/types/Contact";
 import Button from "./Button";
-import ProfilePicture from "./ProfilePicture";
-import addIcon from "../assets/icons/add.svg";
-import changeIcon from "../assets/icons/change.svg";
-import deleteIcon from "../assets/icons/delete.svg";
 import TextInputLabelled from "./TextInputLabelled";
 import { ChangeEvent, useContext, useRef, useState } from "react";
 import { AppContext } from "@/clientFunctions/context/appContext";
+import ProfilePictureUpload from "./ProfilePictureUpload";
 
 const ContactEditOverlay = ({
   contact,
@@ -19,9 +16,6 @@ const ContactEditOverlay = ({
 }) => {
   const isNewContact = !contact;
 
-  const profilePicUploadRef = useRef<HTMLInputElement>(null);
-
-  const [profilePicSrcLocal, setProfilePicSrcLocal] = useState<string>();
   const [profilePicSrc, setProfilePicSrc] = useState<string | undefined>(
     contact?.profilePicSrc
   );
@@ -30,17 +24,6 @@ const ContactEditOverlay = ({
   const [email, setEmail] = useState<string>(contact?.email || "");
 
   const [nameError, setNameError] = useState<boolean>(false);
-
-  const openFileUploadDialog = () => {
-    profilePicUploadRef.current?.click();
-  };
-
-  const onFileUploadChange = (changeEvent: ChangeEvent<HTMLInputElement>) => {
-    const image = changeEvent.target.files?.item(0);
-    if (image) {
-      setProfilePicSrcLocal(URL.createObjectURL(image));
-    }
-  };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.currentTarget.value);
@@ -96,49 +79,7 @@ const ContactEditOverlay = ({
             {isNewContact ? "Add Contact" : "Edit Contact"}
           </div>
 
-          {/*TODO: extract the picture upload part into a separate component */}
-          <div className="flex flex-row justify-start items-center gap-4">
-            <ProfilePicture
-              size="large"
-              src={profilePicSrcLocal || profilePicSrc}
-            />
-
-            {(profilePicSrcLocal || profilePicSrc) && (
-              <>
-                <Button
-                  icon={changeIcon}
-                  onClick={openFileUploadDialog}
-                  type="button"
-                >
-                  Change Picture
-                </Button>
-                <Button
-                  icon={deleteIcon}
-                  onClick={() => {
-                    setProfilePicSrcLocal(undefined);
-                    setProfilePicSrc(undefined);
-                  }}
-                  type="button"
-                />
-              </>
-            )}
-            {!profilePicSrcLocal && !profilePicSrc && (
-              <Button
-                icon={addIcon}
-                onClick={openFileUploadDialog}
-                type="button"
-              >
-                Add Picture
-              </Button>
-            )}
-            <input
-              type="file"
-              ref={profilePicUploadRef}
-              accept={"image/*"}
-              onChange={onFileUploadChange}
-              hidden={true}
-            />
-          </div>
+          <ProfilePictureUpload currentPictureSrc={profilePicSrc} />
           <TextInputLabelled
             label="Name"
             placeholder="Jamie Wright"
