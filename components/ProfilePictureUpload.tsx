@@ -12,7 +12,7 @@ const ProfilePictureUpload = ({
 }: {
   className?: string;
   currentPictureSrc?: string;
-  onPictureSelected?: (picture: File) => void;
+  onPictureSelected?: (picture: File | undefined) => void;
 }) => {
   const [profilePicSrc, setProfilePicSrc] = useState<string | undefined>(
     currentPictureSrc
@@ -30,7 +30,9 @@ const ProfilePictureUpload = ({
       setProfilePicSrc(URL.createObjectURL(image));
     }
 
-    if (image && onPictureSelected) onPictureSelected(image);
+    if (onPictureSelected) {
+      onPictureSelected(image || undefined);
+    }
   };
 
   return (
