@@ -6,13 +6,13 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Contact>
 ) {
-  const { name, email, phoneNr } = req.body;
+  const { name, email, phoneNr, id }: Contact = req.body;
 
   if (req.method !== "PUT") {
     res.end();
     return;
   }
-  return updateContact({ name, email, phoneNr })
+  return updateContact({ name, email, phoneNr, id })
     .then((result) => {
       res.status(200).json(result);
       return result;
