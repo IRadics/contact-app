@@ -9,7 +9,7 @@ export default async function getContacts() {
       throw new Error(e);
     });
 
-  return contacts.map((contact) => {
+  const contactsReturn = contacts.map((contact) => {
     return {
       name: contact.name,
       email: contact.email,
@@ -18,4 +18,6 @@ export default async function getContacts() {
       profilePicSrc: contact.profilePicture?.path,
     } as Contact;
   });
+
+  return contactsReturn;
 }
