@@ -10,6 +10,7 @@ const nextConfig = {
     { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
   ) => {
     if (!process.env.DATABASE_URL) return;
+    const debugWebpack = process.env.DEBUG_WEBPACK === "TRUE";
 
     //copy over DB file for production build if it has been provided as env. variable
     const path = process.env.DATABASE_URL.replace(/file:\.?(.*)/, "$1");
@@ -22,9 +23,19 @@ const nextConfig = {
     //if client, the output path is the root .next folder - this is what we need.
     if (!isServer && !dev) {
       const root = require("path").resolve(__dirname, "./");
+      if (debugWebpack) console.log(`root path: ${root}`);
+
       const outputPath = config.output.path;
-      const from = `${root}/prisma/${path}`;
-      const to = `${outputPath}/../prisma/[name][ext]`;
+      if (debugWebpack) console.log(`output path: ${outputPath}`);
+
+      const from = require("path").resolve(__dirname, `${root}/prisma/${path}`);
+      if (debugWebpack) console.log(`copying db file from: ${from}`);
+
+      const to = require("path").resolve(
+        __dirname,
+        `${outputPath}/../prisma/[name][ext]`
+      );
+      if (debugWebpack) console.log(`copying db file to: ${to}`);
 
       config.plugins.push(
         new CopyPlugin({
