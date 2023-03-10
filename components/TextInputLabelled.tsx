@@ -27,4 +27,6 @@ const TextInputLabelled = React.forwardRef<
   );
 });
 
+TextInputLabelled.displayName = "TextInputLabelled";
+
 export default TextInputLabelled;

@@ -1,6 +1,5 @@
 import Image, { StaticImageData } from "next/image";
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { HTMLProps } from "react";
 
 type ButtonType = "primary" | "secondary" | "special";
 
@@ -69,5 +68,7 @@ const Button = React.forwardRef<
     );
   }
 });
+
+Button.displayName = "Button";
 
 export default Button;
