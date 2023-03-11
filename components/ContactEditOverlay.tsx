@@ -49,20 +49,21 @@ const ContactEditOverlay = ({
       return;
     }
 
-    const contact: Contact = {
+    const contactPayload: Contact = {
       name,
       email,
       phoneNr,
       profilePicSrc,
+      id: contact?.id,
     };
 
     if (isNewContact) {
-      await createContact(contact);
+      await createContact(contactPayload);
     } else {
-      await updateContact(contact);
+      await updateContact(contactPayload);
     }
 
-    if (onSubmit) onSubmit(contact);
+    if (onSubmit) onSubmit(contactPayload);
     contactEditOverlay.close();
   };
 
