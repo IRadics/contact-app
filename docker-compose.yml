@@ -6,6 +6,7 @@ services:
       context: ./
     environment:
       - NODE_ENV=production
+      - DATABASE_URL
     container_name: contact-app
     ports:
       - ${PORT:-3000}:3000
