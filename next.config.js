@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+const paths = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
-module.exports = nextConfig
+const nextConfig = {
+  output: "standalone",
+  reactStrictMode: true,
+};
+
+module.exports = nextConfig;

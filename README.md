@@ -4,8 +4,12 @@ Used Next.js with TypeScript, Tailwind CSS and Prisma for SQLite database.
 
 With the current setup - db file saved locally in prisma folder - the following env variable is needed: (if locally run, in a .env file in the root folder)
 
-| DATABASE_URL | file:./dev.db |
-| ------------ | ------------- |
+| variable     | description                                                                         |
+| ------------ | ----------------------------------------------------------------------------------- |
+| DATABASE_URL | URL to the SQlite database, <br> To use the provided SQlite db file-> file:./dev.db |
+| PORT         | DOCKER ONLY - exposed port <br> default: 3000                                       |
+
+---
 
 **Note**: Due to the limited time to work on it - photo upload is not available yet, a few parts of code cries for refactoring and responsivity is limited
 
