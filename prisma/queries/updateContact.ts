@@ -1,7 +1,7 @@
-import { Contact } from "@/types/Contact";
+import { Contact, ContactPayloadDbUpdate } from "@/types/Contact";
 import prisma from "../prisma";
 
-export default async function updateContact(contact: Contact) {
+export default async function updateContact(contact: ContactPayloadDbUpdate) {
   if (!contact.id)
     throw new Error("contact id is not provided, cannot update contact");
 

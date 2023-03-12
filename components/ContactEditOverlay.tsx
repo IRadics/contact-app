@@ -1,7 +1,7 @@
-import { Contact } from "@/types/Contact";
+import { Contact, ContactPayload } from "@/types/Contact";
 import Button from "./Button";
 import TextInputLabelled from "./TextInputLabelled";
-import { ChangeEvent, useContext, useRef, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { AppContext } from "@/clientFunctions/context/appContext";
 import ProfilePictureUpload from "./ProfilePictureUpload";
 
@@ -11,19 +11,22 @@ const ContactEditOverlay = ({
   onCancel,
 }: {
   contact?: Contact;
-  onSubmit?: (contact: Contact) => void;
+  onSubmit?: (contact: ContactPayload) => void;
   onCancel?: () => void;
 }) => {
   const isNewContact = !contact;
 
-  const [profilePicSrc, setProfilePicSrc] = useState<string | undefined>(
-    contact?.profilePicSrc
-  );
+  const [profilePicture, setProfilePicture] = useState<File>();
+
   const [name, setName] = useState<string>(contact?.name || "");
   const [phoneNr, setPhoneNr] = useState<string>(contact?.phoneNr || "");
   const [email, setEmail] = useState<string>(contact?.email || "");
 
   const [nameError, setNameError] = useState<boolean>(false);
+
+  const handlePictureChange = (picture: File | undefined) => {
+    setProfilePicture(picture);
+  };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.currentTarget.value);
@@ -80,7 +83,10 @@ const ContactEditOverlay = ({
             {isNewContact ? "Add Contact" : "Edit Contact"}
           </div>
 
-          <ProfilePictureUpload currentPictureSrc={profilePicSrc} />
+          <ProfilePictureUpload
+            currentPictureSrc={contact?.profilePicSrc}
+            onPictureSelected={handlePictureChange}
+          />
           <TextInputLabelled
             label="Name"
             placeholder="Jamie Wright"

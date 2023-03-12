@@ -1,14 +1,13 @@
-import { Contact } from "@/types/Contact";
+import { Contact, ContactPayloadDbCreate } from "@/types/Contact";
 import prisma from "../prisma";
 
-export default async function createContact(contact: Contact) {
+export default async function createContact(contact: ContactPayloadDbCreate) {
+  if (!contact.name)
+    throw new Error("contact name is not provided, cannot update contact");
+
   const createdContact = await prisma.contact
     .create({
-      data: {
-        name: contact.name,
-        email: contact.email,
-        phoneNr: contact.phoneNr,
-      },
+      data: contact,
     })
     .then()
     .catch((e) => {

@@ -1,7 +1,7 @@
 import { Contact } from "@/types/Contact";
 
 const getContacts = async () => {
-  const contacts: Contact[] = await fetch("/api/getContacts", {
+  const contacts: Contact[] = await fetch("/api/contact", {
     headers: {
       "Content-Type": "application/json",
     },
