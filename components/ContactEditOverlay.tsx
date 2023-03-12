@@ -52,11 +52,11 @@ const ContactEditOverlay = ({
       return;
     }
 
-    const contactPayload: Contact = {
+    const contactPayload: ContactPayload = {
       name,
       email,
       phoneNr,
-      profilePicSrc,
+      profilePicture,
       id: contact?.id,
     };
 
