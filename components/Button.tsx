@@ -56,12 +56,12 @@ const Button = React.forwardRef<
         className={`group relative rounded-full 
         bg-gradient-to-b from-uicolor-20/100 to-uicolor-20/0 ${baseStyle} ${className}`}
       >
-        <div
+        <span
           className={`rounded-full box-content absolute w-[calc(100%-(2*1px))] h-[calc(100%-(2*1px))] 
           bg-gradient-to-b from-uicolor-60/70 to-uicolor-60/100
           group-hover:bg-[#FFFFFF0A] group-active::bg-[#FFFFFF0A]
           z-[0]`}
-        ></div>
+        ></span>
         {icon && <Image src={icon} alt="" className="z-[1]"></Image>}
         <span className="z-[1] max-sm:hidden">{props.children}</span>
       </button>

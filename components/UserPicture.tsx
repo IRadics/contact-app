@@ -19,7 +19,7 @@ const UserPicture = ({
   };
 
   return (
-    <div
+    <span
       className={`rounded-full border border-x-textcolor-primary w-[${sizePx}px] h-[${sizePx}px] overflow-hidden ${className}`}
     >
       <Image
@@ -30,7 +30,7 @@ const UserPicture = ({
         width={sizePx}
         height={sizePx}
       ></Image>
-    </div>
+    </span>
   );
 };
 
