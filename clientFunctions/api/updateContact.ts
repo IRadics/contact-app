@@ -1,18 +1,15 @@
-import { Contact } from "@/types/Contact";
+import { Contact, ContactPayload } from "@/types/Contact";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
-const updateContact = async (contact: Contact) => {
-  const contactAdded: Contact = await fetch("/api/updateContact", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "PUT",
-    body: JSON.stringify(contact),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((error: Error) => {
+const updateContact = async (contact: ContactPayload) => {
+  const formData = new FormData();
+  Object.entries(contact).forEach(([key, value]) => {
+    if (value !== undefined) formData.append(key, value);
+  });
+
+  const { data: contactAdded }: AxiosResponse<Contact> = await axios
+    .put("/api/contact", formData)
+    .catch((error: AxiosError) => {
       throw error;
     });
 

@@ -1,18 +1,12 @@
 import { Contact } from "@/types/Contact";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 const deleteContact = async (contactId: number) => {
-  const contactDeleted: Contact = await fetch("/api/deleteContact", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "DELETE",
-    body: JSON.stringify({ id: contactId }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((error: Error) => {
+  const formData = new FormData();
+  if (contactId) formData.append("id", contactId.toString());
+  const { data: contactDeleted }: AxiosResponse<Contact> = await axios
+    .delete("/api/contact", { data: formData })
+    .catch((error: AxiosError) => {
       throw error;
     });
 

@@ -1,4 +1,4 @@
-import { Contact } from "@/types/Contact";
+import { Contact, ContactPayload } from "@/types/Contact";
 
 import { createContext, useReducer } from "react";
 import createContact from "../api/createContact";
@@ -70,8 +70,8 @@ type AppContextType = {
     contacts: Contact[];
     fetchContacts: () => void;
     deleteContact: (contactId: number) => Promise<boolean>;
-    updateContact: (contact: Contact) => Promise<boolean>;
-    createContact: (contact: Contact) => Promise<boolean>;
+    updateContact: (contact: ContactPayload) => Promise<boolean>;
+    createContact: (contact: ContactPayload) => Promise<boolean>;
   };
 
   contactEditOverlay: {
@@ -112,34 +112,43 @@ export const AppContextProvider = ({
       contacts: state.contacts,
       fetchContacts: fetchContacts,
 
-      createContact: async (contact: Contact) => {
+      createContact: async (contact: ContactPayload) => {
         return await createContact(contact)
           .then(() => {
             fetchContacts();
             return true;
           })
           .catch((error) => {
+            throw error;
+          })
+          .catch(() => {
             return false;
           });
       },
 
-      updateContact: async (contact: Contact) => {
+      updateContact: async (contact: ContactPayload) => {
         return await updateContact(contact)
           .then(() => {
             fetchContacts();
             return true;
           })
           .catch((error) => {
+            throw error;
+          })
+          .catch(() => {
             return false;
           });
       },
       deleteContact: async (contactId: number) => {
         return await deleteContact(contactId)
-          .then(() => {
+          .then((deleted) => {
             fetchContacts();
             return true;
           })
           .catch((error) => {
+            throw error;
+          })
+          .catch(() => {
             return false;
           });
       },

@@ -15,14 +15,17 @@ model Contact {
     name String
     phoneNr String?
     email String?
-  profilePicture ProfilePicture? @relation(fields: [profilePictureId], references: [id])
+  profilePicture Image? @relation(fields: [profilePictureId], references: [id])
   profilePictureId Int? @unique
     
 }
 
-model ProfilePicture {
+model Image {
   id Int @id @default(autoincrement())
   path String
+  ext String
+  hash String
+  size Int
+  dateCreated DateTime @default(now())
   contact Contact[]
-
 }
